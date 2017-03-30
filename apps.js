@@ -78,16 +78,32 @@ app.get('/',  (req, res) => {
 })
 
 app.post('/ajouter', function(req, res){
-	console.log('verification si bien transferé');
+	//console.log('debut de la fonction ajouter');
+	const obj = 
+	{	
+		nom: req.body.nom,
+		prenom: req.body.prenom,
+		telephone: req.body.telephone,
+		ville: req.body.ville,
+		groupeSanguin: req.body.groupeSanguin
+		
+	};
+	//console.log('AJOUTTTT');
+	db.collection('adresses').insertOne(obj);
+	res.redirect('/');
+});
+
+
+	/*
 	req.checkBody('prenom','prenom necessaire').notEmpty();
 	req.checkBody('nom','nom necessaire').notEmpty();
 	req.checkBody('email','email necessaire').notEmpty();
-
+	
 	const erreurs = req.validationErrors();
 	if(erreurs){
 		res.render('index', {
 		title:'Clients',
-		//utilisateurs:utilisateurs,
+		adresses:adresse,
 		erreurs:erreurs
 	});
 		}else{
@@ -102,8 +118,7 @@ app.post('/ajouter', function(req, res){
 	//console.log(req.body.nom);
 	//console.log(req.body.email);
 	
-	
-})
+	*/
 
 
 //const nomHote = '127.0.0.1';
