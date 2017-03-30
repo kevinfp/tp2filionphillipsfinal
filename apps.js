@@ -96,7 +96,7 @@ app.post('/ajouter', function(req, res){
 });
 
 app.post('/modifier', function(req, res){
-	//console.log('debut de la fonction ajouter');
+	//console.log('debut de la fonction modif');
 	const obj = 
 	{	
 		nom: req.body.nom,
@@ -106,8 +106,15 @@ app.post('/modifier', function(req, res){
 		groupeSanguin: req.body.groupeSanguin
 	};
 
-	console.log('Modif');
+	//console.log('Modif');
 	db.collection('adresses').updateOne({"_id":idObjet(req.body.objetQuonMod)},{$set:obj});
+	res.redirect('/');
+});
+
+app.post('/detruire', function(req, res){
+	console.log('debut de la fonction detruire');
+	console.log('detruire');
+	db.collection('adresses').remove({"_id":idObjet(req.body.objetQuonDetruit)});
 	res.redirect('/');
 });
 
