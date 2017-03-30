@@ -23,6 +23,7 @@
     <input type="text" placeholder="Telephone" name="telephone">
     <input type="text" placeholder="ville" name="ville">
     <input type="text" placeholder="groupeSanguin" name="groupeSanguin">
+    <input type="text" placeholder="ID de l'objet qu'on modifie" name="objetQuonMod">
     <button type="submit">Submit</button>
   </form>
 
@@ -34,6 +35,7 @@
       <span><%= adresse[i].telephone %></span>
       <span><%= adresse[i].ville %></span>
       <span><%= adresse[i].groupeSanguin %></span>
+      <span><%= adresse[i]._id %></span>
     </li>
   <% } %>
   </ul>

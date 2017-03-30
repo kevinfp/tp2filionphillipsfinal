@@ -3,9 +3,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient
+const idObjet = require('mongodb').ObjectID
 const cheminDacces = require('path');
 const expressValidator = require('express-validator');
 const app =express();
+
 
 
 
@@ -90,6 +92,22 @@ app.post('/ajouter', function(req, res){
 	};
 	//console.log('AJOUTTTT');
 	db.collection('adresses').insertOne(obj);
+	res.redirect('/');
+});
+
+app.post('/modifier', function(req, res){
+	//console.log('debut de la fonction ajouter');
+	const obj = 
+	{	
+		nom: req.body.nom,
+		prenom: req.body.prenom,
+		telephone: req.body.telephone,
+		ville: req.body.ville,
+		groupeSanguin: req.body.groupeSanguin
+	};
+
+	console.log('Modif');
+	db.collection('adresses').updateOne({"_id":idObjet(req.body.objetQuonMod)},{$set:obj});
 	res.redirect('/');
 });
 
