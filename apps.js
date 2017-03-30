@@ -87,7 +87,7 @@ app.post('/ajouter', function(req, res){
 	if(erreurs){
 		res.render('index', {
 		title:'Clients',
-		utilisateurs:utilisateurs,
+		//utilisateurs:utilisateurs,
 		erreurs:erreurs
 	});
 		}else{
