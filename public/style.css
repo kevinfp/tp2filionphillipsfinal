@@ -1,0 +1,25 @@
+body
+{
+	background-color: green;
+}
+
+table
+{
+	background-color: red;
+	width: 90%;
+	border-collapse: collapse;
+
+}
+
+tr
+{
+	background-color: purple;
+
+}
+
+td
+{
+	background-color: yellow;
+
+	width: 20%;
+}

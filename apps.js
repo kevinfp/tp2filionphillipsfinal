@@ -64,7 +64,7 @@ app.use(expressValidator({
 }));
 
 
-
+//AFFICHAGE
 app.get('/',  (req, res) => {
    console.log('la route route get / = ' + req.url)
  
@@ -112,10 +112,17 @@ app.post('/modifier', function(req, res){
 });
 
 app.post('/detruire', function(req, res){
-	console.log('debut de la fonction detruire');
-	console.log('detruire');
+	//console.log('debut de la fonction detruire');
+	//console.log('detruire');
 	db.collection('adresses').remove({"_id":idObjet(req.body.objetQuonDetruit)});
 	res.redirect('/');
+});
+
+app.get('/trier', function(req, res){
+	const triage = db.collection('adresses').find().sort({ville:1}).toArray(function(err, resultat){
+	res.render('index.ejs', {adresse: resultat})
+	//console.log('AT LEAST Y SE REND ICI');	
+	})
 });
 
 

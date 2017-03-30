@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Mon Application</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+  	<meta charset="UTF-8">
+  	<title>tp2 kevin</title>
 </head>
 <body>
   tp2!!
@@ -34,16 +35,24 @@
 	    <button type="submit">Submit</button>
 	  </form>
 
+	  <a href="/trier">Triage selon ville</a>
+
   <ul class="adresse">
   <% for(var i=0; i<adresse.length; i++) {%>
-    <li class="client">
-      <span><%= adresse[i].nom %></span>
-      <span><%= adresse[i].prenom %></span>
-      <span><%= adresse[i].telephone %></span>
-      <span><%= adresse[i].ville %></span>
-      <span><%= adresse[i].groupeSanguin %></span>
-      <span><%= adresse[i]._id %></span>
-    </li>
+   
+    <table>
+    	<tr>
+	      <td><span><%= adresse[i].nom %></span></td>
+	      <td><span><%= adresse[i].prenom %></span></td>
+	      <td><span><%= adresse[i].telephone %></span></td>
+	      <td><span><%= adresse[i].ville %></span></td>
+	      <td><span><%= adresse[i].groupeSanguin %></span></td>
+	      <td><span><%= adresse[i]._id %></span></td>
+	      <td><a class ="modifier" href="">MODIFIER</a></td>
+	      <td><a class ="supprimer" href="">SUPPRIMER</a></td>
+      	</tr>
+    </table>
+  
   <% } %>
   </ul>
 
