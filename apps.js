@@ -8,12 +8,14 @@ const expressValidator = require('express-validator');
 const app =express();
 
 
+
 var db // variable qui contiendra le lien sur la BD
 
-MongoClient.connect('mongodb://127.0.0.1:27017/', (err, database) => {
+MongoClient.connect('mongodb://127.0.0.1:27017/carnet_adresse', (err, database) => {
   if (err) return console.log(err)
+  	console.log('connexion a la bd tentative')
   db = database
-  app.listen(8081, () => {
+  app.listen(8081, function() {
     console.log('connexion à la BD et on écoute sur le port 8081')
   })
 })
@@ -59,36 +61,24 @@ app.use(expressValidator({
   }
 }));
 
-const utilisateurs = [
-	{
-		id:1,
-		prenom:'Kevin',
-		nom:'Filio-Phillips',
-		email:'1234@gmail.com',
-	},
-	{
-		id:2,
-		prenom:'billy',
-		nom:'Fbbbips',
-		email:'12dfsdfdsds34@gmail.com',
-	},
-	{
-		id:3,
-		prenom:'kavis',
-		nom:'reed',
-		email:'dsfs4@gmail.com',
-	}
-]
 
-app.get('/',function(req, res){
-	res.render('index', {
-		title:'Clients',
-		utilisateurs:utilisateurs
-	});
-});
 
-app.post('/utilisateurs/ajouter', function(req, res){
-	
+app.get('/',  (req, res) => {
+   console.log('la route route get / = ' + req.url)
+ 
+    var cursor = db.collection('adresses').find().toArray(function(err, resultat){
+       if (err) return console.log(err)
+    // renders index.ejs
+    // affiche le contenu de la BD
+    res.render('index.ejs', {adresse: resultat})
+
+    }) 
+    
+
+})
+
+app.post('/ajouter', function(req, res){
+	console.log('verification si bien transferé');
 	req.checkBody('prenom','prenom necessaire').notEmpty();
 	req.checkBody('nom','nom necessaire').notEmpty();
 	req.checkBody('email','email necessaire').notEmpty();
@@ -115,9 +105,7 @@ app.post('/utilisateurs/ajouter', function(req, res){
 	
 })
 
-app.listen(3000, function(){
-	console.log('serveur enclencher sur 3000');
-})
+
 //const nomHote = '127.0.0.1';
 //const port = 8081;
 

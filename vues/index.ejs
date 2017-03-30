@@ -1,37 +1,27 @@
-<% include structure/header.ejs %>
-	<h1>AJOUTER</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mon Application</title>
+</head>
+<body>
+  Node.js, Express et MongoDB.
+  <button id='update'>Mise à jour téléphone</button>
+    <form action="/ajouter" method="POST">
+    <input type="text" placeholder="nom" name="nom">
+    <input type="text" placeholder="Telephone" name="telephone">
+    <button type="submit">Submit</button>
+  </form>
 
-	<% if(erreurs != undefined){ %>
-		<ul>
-		<% erreurs.forEach(function(erreurs){ %>
-			<li><%= erreurs.msg %></li>
-			<% }) %>
-		</ul>
-	<% } %>
-
-	
-		<form method="POST" action="/utilisateurs/ajouter">
-			<label>Prenom</label><br>
-			<input type="text" name="prenom">
-			<br>
-
-			<label>Nom</label><br>
-			<input type="text" name="nom">
-			<br>
-			<label>Email</label><br>
-			<input type="text" name="email">
-			<br><br>
-			<input type="submit" name="Submit">
-
-		</form>
-		<h1><%= title %></h1>
-		<% utilisateurs.forEach(function(utilisateurs){ %>
-		<ul>
-			<li><%= utilisateurs.prenom %> <%= utilisateurs.nom %></li>
-		</ul>
-		<% }) %>
-		
-<% include structure/footer.ejs %>
+  <ul class="adresse">
+  <% for(var i=0; i<adresse.length; i++) {%>
+    <li class="client">
+      <span><%= adresse[i].nom %></span>
+      <span><%= adresse[i].telephone %></span>
+    </li>
+  <% } %>
+  </ul>
 
 
-
+</body>
+</html>
