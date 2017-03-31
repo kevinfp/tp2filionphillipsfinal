@@ -8,14 +8,11 @@ const cheminDacces = require('path');
 const expressValidator = require('express-validator');
 const app =express();
 
-
-
-
 var db // variable qui contiendra le lien sur la BD
 
 MongoClient.connect('mongodb://127.0.0.1:27017/carnet_adresse', (err, database) => {
   if (err) return console.log(err)
-  	console.log('connexion a la bd tentative')
+  	//console.log('connexion a la bd')
   db = database
   app.listen(8081, function() {
     console.log('connexion à la BD et on écoute sur le port 8081')
