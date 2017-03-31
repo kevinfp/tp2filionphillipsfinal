@@ -6,9 +6,10 @@
   	<title>TP2 VEILLE - KEVIN FILION-PHILLIPS</title>
 </head>
 <body>
-  <h2>TRAVAIL PRATIQUE 2</h2>
+  <h1>TRAVAIL PRATIQUE 2</h1>
+  <!--FORMULAIRE D'AJOUT-->
 	    <h2>AJOUTER</h2>
-	    <form action="/ajouter" method="POST">
+	    <form action="/ajouter" id="formAjout" method="POST">
 	    <input type="text" placeholder="nom" name="nom">
 	    <input type="text" placeholder="prenom" name="prenom">
 	    <input type="text" placeholder="Telephone" name="telephone">
@@ -17,7 +18,32 @@
 	    <button type="submit">Ajouter</button>
 	  </form>
 
-	  <h2>MODIFIER</h2>
+	  
+ <!--BOUTON DE TRIAGE-->
+	  <a href="/trier" class="triageClasse">Triage selon la ville</a>
+ 
+
+ <!--LE TABLEAU ONTENANT LES ELMS DE LA BDD-->
+  <ul class="adresse">
+  <% for(var i=0; i<adresse.length; i++) {%>
+   
+    <table>
+    	<tr>
+	      <td contenteditable="true"><p><%= adresse[i].nom %></p></td> <!--CASE NOM (EDITABLE)-->
+	      <td contenteditable="true"><p><%= adresse[i].prenom %></p></td> <!--CASE PRENOM (EDITABLE)-->
+	      <td contenteditable="true"><p><%= adresse[i].telephone %></p></td> <!--CASE TELEPHONE (EDITABLE)-->
+	      <td contenteditable="true"><p><%= adresse[i].ville %></p></td><!--CASE VILLE (EDITABLE)-->
+	      <td contenteditable="true"><p><%= adresse[i].groupeSanguin %></p></td><!--GRP SANGUIN (EDITABLE)-->
+	      <td class="caseID"><p><%= adresse[i]._id %></p></td><!--ID (NON-EDITABLE)-->
+	      <td><a class ="modifier" href="#">MODIFIER</a></td><!--BTN MODIF-->
+	      <td><a class ="supprimer" href="#">SUPPRIMER</a></td><!--BTN SUPP-->
+      	</tr>
+    </table>
+  
+  <% } %>
+  </ul>
+
+	<h2>MODIFIER</h2>
 	    <form action="/modifier" method="POST" id="formMod" >
 	    <input type="text" class="nomMod" placeholder="nom" name="nom">
 	    <input type="text" class="prenomMod" placeholder="prenom" name="prenom">
@@ -34,29 +60,6 @@
 	    <input type="text" class="idSupp" placeholder="ID de l'objet qu'on veux DÉTRUIRE" name="objetQuonDetruit">
 	    <button type="submit">Supprimer</button>
 	  </form>
-
-	  <a href="/trier">Triage selon ville</a>
-
-  <ul class="adresse">
-  <% for(var i=0; i<adresse.length; i++) {%>
-   
-    <table>
-    	<tr>
-	      <td contenteditable="true"><%= adresse[i].nom %></td>
-	      <td contenteditable="true"><%= adresse[i].prenom %></td>
-	      <td contenteditable="true"><%= adresse[i].telephone %></td>
-	      <td contenteditable="true"><%= adresse[i].ville %></td>
-	      <td contenteditable="true"><%= adresse[i].groupeSanguin %></td>
-	      <td><%= adresse[i]._id %></td>
-	      <td><a class ="modifier" href="#">MODIFIER</a></td>
-	      <td><a class ="supprimer" href="#">SUPPRIMER</a></td>
-      	</tr>
-    </table>
-  
-  <% } %>
-  </ul>
-
-
 </body>
 <script src="coteClient.js"></script>
 </html>

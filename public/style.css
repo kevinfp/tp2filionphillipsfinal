@@ -1,25 +1,105 @@
+@font-face {
+    font-family: sketchBlock;
+    src: url(Sketch_Block.ttf);
+}
+
+@font-face {
+    font-family: fleaMarket;
+    src: url(Flea_Market_Finds.ttf);
+}
+
+@font-face {
+    font-family: bebas;
+    src: url(BebasNeue.otf);
+}
+
 body
 {
-	background-color: green;
+	background-color: #3F473F;
+}
+
+
+h1
+{
+	font-family: sketchBlock;
+	font-size: 3em;
+}
+
+h2
+{
+	font-family: fleaMarket;
+	font-size: 2em;
+}
+
+.adresse
+{
+	padding-left: 0;
 }
 
 table
 {
-	background-color: red;
+	font-family: bebas;
 	width: 90%;
 	border-collapse: collapse;
-
+	margin: auto;
 }
 
 tr
 {
-	background-color: purple;
-
+	padding: auto;
 }
 
-td
+th,td
 {
-	background-color: yellow;
+	display:inline-flex;
+	justify-content:space-around;
+	flex-wrap:wrap;
+	background-color: black;
+	width: 10%;
+	margin: 5px;
+	height: 50px;
+	color:white;
+	-webkit-transition:background-color 2s;
+  	transition:background-color 2s;
+}
 
+
+
+td:hover
+{
+	background-color: #3c3c3c;
+}
+
+.caseID
+{
+	width: 16%;
+}
+
+#formMod
+{
 	width: 20%;
 }
+
+#formAjout
+{
+	width: 20%;
+	margin: 100px;
+}
+
+a
+{
+	margin-top: 15px;
+}
+
+.triageClasse
+{
+
+	font-family: bebas;
+	background-color: black;
+	height: 40px;
+	font-size: 1.5em;
+	color: white;
+	text-decoration: none;
+	margin: 50px;
+}
+

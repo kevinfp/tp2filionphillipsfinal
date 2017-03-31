@@ -1,5 +1,7 @@
 //const http = require('http');
 //const fichierS = require('fs');
+
+//Modules installer
 const express = require('express');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient
@@ -10,6 +12,8 @@ const app =express();
 
 var db // variable qui contiendra le lien sur la BD
 
+
+//Connexion a la BDD
 MongoClient.connect('mongodb://127.0.0.1:27017/carnet_adresse', (err, database) => {
   if (err) return console.log(err)
   	//console.log('connexion a la bd')
@@ -19,22 +23,23 @@ MongoClient.connect('mongodb://127.0.0.1:27017/carnet_adresse', (err, database) 
   })
 })
 
-
+//Nous dit quand on refresh
 var log = function(req, res, next){
 	console.log('Log in');
 	next();
 }
 app.use(log);
 
-
+//Avoir le template EJS
 app.set('view engine', 'ejs');
 app.set('views', cheminDacces.join(__dirname,'vues'));
+
 
 //Middleware de bodyparser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-//Foutre chemin d acces pour fichier statique (css html)
+//Foutre chemin d acces pour fichier statique (css html et cie)
 app.use(express.static(cheminDacces.join(__dirname, 'public')))
 
 //VARIABLES GLOBALES
@@ -42,8 +47,10 @@ app.use(function(req, res, next){
 	res.locals.erreurs = null;
 	next();
 });
+
+
 //EXPRESS VALIDATOR
-app.use(expressValidator({
+/*app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
       var namespace = param.split('.')
       , root    = namespace.shift()
@@ -58,10 +65,10 @@ app.use(expressValidator({
       value : value
     };
   }
-}));
+}));*/
 
 
-//AFFICHAGE
+//AFFICHAGE DES DIFFERENTS ROUTES
 app.get('/',  (req, res) => {
    console.log('la route route get / = ' + req.url)
  
@@ -76,6 +83,7 @@ app.get('/',  (req, res) => {
 
 })
 
+//ROUTE AJOUTER
 app.post('/ajouter', function(req, res){
 	//console.log('debut de la fonction ajouter');
 	const obj = 
@@ -92,6 +100,8 @@ app.post('/ajouter', function(req, res){
 	res.redirect('/');
 });
 
+
+//ROUTE MODIFIER
 app.post('/modifier', function(req, res){
 	//console.log('debut de la fonction modif');
 	const obj = 
@@ -108,6 +118,8 @@ app.post('/modifier', function(req, res){
 	res.redirect('/');
 });
 
+
+//ROUTE DETRUIRE
 app.post('/detruire', function(req, res){
 	//console.log('debut de la fonction detruire');
 	//console.log('detruire');
@@ -115,6 +127,7 @@ app.post('/detruire', function(req, res){
 	res.redirect('/');
 });
 
+//ROUTE TRIER (ICI PAR VILLE)
 app.get('/trier', function(req, res){
 	const triage = db.collection('adresses').find().sort({ville:1}).toArray(function(err, resultat){
 	res.render('index.ejs', {adresse: resultat})
@@ -123,50 +136,4 @@ app.get('/trier', function(req, res){
 });
 
 
-	/*
-	req.checkBody('prenom','prenom necessaire').notEmpty();
-	req.checkBody('nom','nom necessaire').notEmpty();
-	req.checkBody('email','email necessaire').notEmpty();
-	
-	const erreurs = req.validationErrors();
-	if(erreurs){
-		res.render('index', {
-		title:'Clients',
-		adresses:adresse,
-		erreurs:erreurs
-	});
-		}else{
-			const nouvelUtilisateur= {
-			prenom:req.body.prenom,
-			nom:req.body.nom,
-			email:req.body.email
-		}
-		console.log('AJOUT AVEC SUCCES');
-	}
-	//console.log(req.body.prenom);
-	//console.log(req.body.nom);
-	//console.log(req.body.email);
-	
-	*/
-
-
-//const nomHote = '127.0.0.1';
-//const port = 8081;
-
-/*fichierS.readFile('index.htm',(err, html)=>{
-		if(err)
-		{
-			throw err;
-		}
-	const serveur = http.createServer((req, res)=>{
-		res.statusCode = 200;
-		res.setHeader('Content-type', 'text/html');
-		res.write(html);
-		res.end();
-	});
-
-	serveur.listen(port, nomHote, ()=>{
-		console.log('Serveur lauche sur' + port);
-	});
-});*/
 
