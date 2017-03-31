@@ -10,7 +10,10 @@ var villeModif = document.getElementsByClassName("villeMod")[0];
 var groupeSanguinModif = document.getElementsByClassName("groupeSanguinMod")[0];
 var idDeModif = document.getElementsByClassName("idMod")[0];
 
+var idDeSupp = document.getElementsByClassName("idSupp")[0];
+
 var formulaireModif = document.getElementById('formMod');
+var formulaireSupp = document.getElementById('formSupp');
 
 
 //console.log(modifBtn.length);
@@ -34,14 +37,15 @@ function modifierFonction()
   villeModif.value = this.parentElement.parentElement.getElementsByTagName('td')[3].innerHTML;
   groupeSanguinModif.value = this.parentElement.parentElement.getElementsByTagName('td')[4].innerHTML;
   idDeModif.value = this.parentElement.parentElement.getElementsByTagName('td')[5].innerHTML;
-
   formulaireModif.submit();
   //console.log(nomModif);
 }
 
 function supprimerFonction() 
 {
-  console.log(this + 'SUPPRIMER');  
+	idDeSupp.value = this.parentElement.parentElement.getElementsByTagName('td')[5].innerHTML;
+	//console.log(this + 'SUPPRIMER');  
+	formulaireSupp.submit();
 }
 
 
